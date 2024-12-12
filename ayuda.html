@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayuda - Travelers World</title>
+    <link rel="stylesheet" href="vuelo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header, footer {
+            background-color: #343a40;
+            color: white;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        /* Help Center Styles */
+        .help-center {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .help-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .help-header h1 {
+            font-size: 36px;
+        }
+
+        .help-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 20%;
+            top: 25%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #007bff;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Tab and FAQ Styles */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px 5px 0 0;
+            background-color: #f1f1f1;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* FAQ Cards */
+        .faq-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .faq-box {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s;
+        }
+
+        .faq-box:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .faq-box h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .faq-box p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Footer Styles */
+        footer {
+            padding: 40px 0;
+            background-color: #343a40;
+        }
+
+        footer .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer h3 {
+            margin-bottom: 20px;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+        }
+
+        footer ul li a {
+            color: white;
+        }
+
+        .social-links i {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        /* Chat Icon Styles */
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s;
+        }
+
+        .chat-icon:hover {
+            background-color: #0056b3;
+        }
+
+        /* Chat Modal Styles */
+        .chat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .close-chat {
+            cursor: pointer;
+            color: #dc3545;
+            font-size: 20px;
+        }
+
+        .chat-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+       /* Chat Input */
+.chat-input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #0056b3;
+}
+
+        footer {
+    padding: 40px 0;
+    position: relative; /* Asegúrate de que el footer sea relativo */
+    z-index: 10; /* Asegúrate de que el footer esté en un nivel más bajo que el chat */
+}
+/* Chat Icon */
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.chat-icon i {
+    font-size: 24px;
+}
+
+/* Chat Window */
+.chat-window {
+    position: fixed;
+    bottom: 80px; /* Asegúrate de que esté por encima del footer */
+    right: 20px;
+    width: 300px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none; /* Inicialmente oculto */
+    flex-direction: column;
+    z-index: 999;
+}
+
+.chat-header {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    padding: 10px;
+    max-height: 300px; /* Puedes ajustar esto */
+    overflow-y: auto;
+}
+
+.faq {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.chat-answer {
+    margin-top: 10px;
+    color: #555;
+}
+
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .search-bar input {
+                width: 80%;
+            }
+
+            .faq-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1><a href="index.html">Travelers World</a></h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="favoritos.html">Favoritos</a></li>
+            <li><a href="beneficios.html">Hazte Socio</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="help-center">
+    <div class="help-header">
+        <h1>Centro de Ayuda</h1>
+        <p>¿Tienes preguntas? Encuentra todas las respuestas aquí. Usa la barra de búsqueda o navega por las categorías.</p>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Busca tu pregunta o problema...">
+        <button>Buscar</button>
+    </div>
+
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="flights">Vuelos</div>
+            <div class="tab" data-tab="hotels">Hoteles</div>
+            <div class="tab" data-tab="packages">Paquetes</div>
+            <div class="tab" data-tab="support">Soporte</div>
+        </div>
+    </div>
+
+    <div class="tab-content active" id="flights">
+        <div class="faq-section">
+            <div class="faq-box">
+                <h3>¿Cómo reservar un vuelo?</h3>
+                <p>Accede a la sección de vuelos, selecciona tu origen y destino, fechas y opciones de vuelo, y finaliza la compra.</p>
+            </div>
+            <div class="faq-box">
+                <h3>¿Cómo modificar una reserva?</h3>
+                <p>En "Mis Reservas" podrás realizar modificaciones según las políticas de la aerolínea.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="hotels">
+        <div class="faq-section">
+            <div class="faq-box">
+                <h3>¿Cómo reservar un hotel?</h3>
+                <p>Selecciona tu destino, elige el hotel de tu preferencia y finaliza la reserva en la sección de Hoteles.</p>
+            </div>
+            <div class="faq-box">
+                <h3>¿Puedo modificar mi reserva de hotel?</h3>
+                <p>Accede a "Mis Reservas" para ver las opciones de modificación.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="packages">
+        <div class="faq-section">
+            <div class="faq-box">
+                <h3>¿Qué incluyen los paquetes turísticos?</h3>
+                <p>Los paquetes pueden incluir vuelos, hoteles, traslados y actividades. Revisa los detalles antes de reservar.</p>
+            </div>
+            <div class="faq-box">
+                <h3>¿Cómo personalizar un paquete?</h3>
+                <p>Puedes añadir o eliminar componentes del paquete en la página de reservas.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="support">
+        <div class="faq-section">
+            <div class="faq-box">
+                <h3>¿Cómo contactar con soporte?</h3>
+                <p>Puedes contactarnos a través del chat en vivo, teléfono o email disponible 24/7.</p>
+            </div>
+            <div class="faq-box">
+                <h3>¿Cómo iniciar una queja?</h3>
+                <p>Accede a la sección de Soporte y completa el formulario de quejas o llama a nuestro centro de atención.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chat Icon -->
+<div class="chat-icon" onclick="toggleChat()">
+    <i class="fas fa-comments"></i>
+</div>
+
+<!-- Chat Modal -->
+<div class="chat-modal" id="chatModal">
+    <div class="chat-box">
+        <div class="chat-header">
+            <h3>Chat de Soporte</h3>
+            <span class="close-chat" onclick="toggleChat()">&times;</span>
+        </div>
+        <div class="chat-messages">
+            <p>Bienvenido al chat. ¿Cómo podemos ayudarte hoy?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe tu mensaje...">
+            <button>Enviar</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <button onclick="connectToHuman()">Hablar con un humano</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-columns">
+        <div>
+            <h3>Compañía</h3>
+            <ul>
+                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="mision.html">Misión</a></li>
+                <li><a href="vision.html">Visión</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Soporte</h3>
+            <ul>
+                <li><a href="ayuda.html">Centro de Ayuda</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Síguenos</h3>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travelers World. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="politicas.html">Política de privacidad</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+    </div>
+</footer>
+<!-- Chat Icon -->
+<div class="chat-icon" onclick="toggleChat()">
+    <i class="fas fa-comments"></i>
+</div>
+
+<!-- Chat Window -->
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <h3>Chat con IA</h3>
+        <button onclick="toggleChat()">Cerrar</button>
+    </div>
+    <div class="chat-body">
+        <div class="faq" onclick="showAnswer('q1')">
+            <h4>¿Cómo reservar un vuelo?</h4>
+        </div>
+        <div class="faq" onclick="showAnswer('q2')">
+            <h4>¿Cómo modificar una reserva?</h4>
+        </div>
+        <div class="faq" onclick="showAnswer('q3')">
+            <h4>¿Cómo contactar con soporte?</h4>
+        </div>
+        <div id="chatAnswer" class="chat-answer"></div>
+
+        <hr> <!-- Línea de separación -->
+
+        <div class="chat-input">
+            <input type="text" id="userQuestion" placeholder="Escribe tu pregunta aquí..." />
+            <button onclick="getAnswer()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+ 
+ function toggleChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    chatWindow.style.display = chatWindow.style.display === 'none' || chatWindow.style.display === '' ? 'flex' : 'none';
+}
+
+function showAnswer(question) {
+    const answers = {
+        q1: "Para reservar un vuelo, accede a la sección de vuelos, selecciona tu origen y destino, y finaliza la compra.",
+        q2: "Para modificar una reserva, dirígete a 'Mis Reservas' y sigue las instrucciones.",
+        q3: "Puedes contactar con soporte a través del chat en vivo, teléfono o email disponible 24/7."
+    };
+    
+    document.getElementById('chatAnswer').innerText = answers[question];
+    document.getElementById('userQuestion').value = ''; // Limpia el textbox
+}
+
+function getAnswer() {
+    const userInput = document.getElementById('userQuestion').value.trim();
+    const responseArea = document.getElementById('chatAnswer');
+
+    if (userInput) {
+        // Aquí puedes implementar la lógica para responder a las preguntas de los usuarios.
+        // Por ahora, usaremos una respuesta de ejemplo.
+        responseArea.innerText = "Gracias por tu pregunta. Estoy aquí para ayudarte, pero esta funcionalidad aún no está implementada.";
+        document.getElementById('userQuestion').value = ''; // Limpia el textbox
+    } else {
+        responseArea.innerText = "Por favor, escribe una pregunta antes de enviar.";
+    }
+}
+
+    
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+        });
+    });
+
+    function toggleChat() {
+        const chatWindow = document.getElementById('chatWindow');
+        chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function toggleAnswer(answerId) {
+        const answer = document.getElementById(answerId);
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>

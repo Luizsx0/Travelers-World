@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paquetes</title>
+    <link rel="stylesheet" href="diseño.css">
+    <style>
+        /* Asegúrate de que el menú esté oculto por defecto */
+        .dropdown-content {
+            display: none; /* Menú oculto por defecto */
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1><a href="index.html" style="text-decoration: none; color: white;">Travelers World</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+                <li><a href="beneficios.html">Hazte Socio</a></li>
+                <li class="dropdown" id="user-dropdown">
+                    <span id="greeting" class="greeting" style="cursor: pointer;"><a href="javascript:void(0);">Iniciar Sesión</a></span>
+                    <div class="dropdown-content" id="user-menu">
+                        <span id="user-name">Usuario</span>
+                        <a href="favoritos.html">Favoritos</a>
+                        <a href="perfil.html">Mi perfil</a>
+                        <a href="#" id="logout-btn">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        // Verificar el nombre de usuario en localStorage
+        const userName = localStorage.getItem('userName');
+        const greetingElement = document.getElementById('greeting');
+        const userMenu = document.getElementById('user-menu');
+
+        if (userName) {
+            greetingElement.innerHTML = userName; // Mostrar nombre de usuario
+            document.getElementById('user-name').innerText = userName; // Mostrar en el menú desplegable
+        }
+
+        greetingElement.addEventListener('click', function() {
+            // Alternar la visibilidad del menú al hacer clic
+            userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('userName'); // Eliminar el nombre de usuario
+            greetingElement.innerHTML = '<a href="inicio.html">Iniciar Sesión</a>'; // Cambiar a enlace
+            document.getElementById('user-name').innerText = 'Usuario'; // Restablecer nombre en el menú
+            userMenu.style.display = 'none'; // Ocultar el menú desplegable
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        window.addEventListener('click', function(event) {
+            if (!userDropdown.contains(event.target)) {
+                userMenu.style.display = 'none'; // Ocultar el menú si se hace clic fuera
+            }
+        });
+    </script>
+    
+    <section class="benefits-section">
+        <h1>Paquetes</h1>
+        <div class="benefits-container">
+
+            <!-- Paquete Gratis -->
+            <div class="benefit-card current-plan">
+                <h2>Viajero Novato</h2>
+                <p class="benefit-description">Sin beneficios adicionales.</p>
+                <p class="price">$0.00 / anual</p>
+                <button class="current-plan-btn">En uso actualmente</button>
+            </div>
+
+            <div class="benefit-card">
+                <h2>Viajero Estandar</h2>
+                <p class="benefit-description">Beneficios exclusivos <br> Servicio al cliente prioritario</p>
+                <p class="price">$19.99 / anual</p>
+                <a href="factura.html" class="buy-btn">Comprar</a>
+            </div>
+
+            <div class="benefit-card">
+                <h2>Maestro de caminos</h2>
+                <p class="benefit-description">Beneficios exclusivos <br> Servicio al cliente prioritario <br> Sistema de puntos <br>Vestimenta asociada</p>
+                <p class="price">$49.99 / anual</p>
+                <a href="factura2.html" class="buy-btn">Comprar</a>
+            </div>
+
+            <div class="benefit-card">
+                <h2>Sabio de los senderos</h2>
+                <p class="benefit-description">Beneficios exclusivos <br> Servicio al cliente prioritario <br>Sistema de puntos <br> Vestimenta asociada <br> Viaje Cumpleañero <br> Escapada VIP</p>
+                <p class="price">$79.99 / anual</p>
+                <a href="factura3.html" class="buy-btn">Comprar</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

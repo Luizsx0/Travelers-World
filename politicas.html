@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Travelers World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: auto;
+            margin: 0;
+            padding: 0; /* Cambiado a 0 para evitar espacios adicionales */
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        * {
+            box-sizing: border-box; /* Asegura que el padding y el margen no afecten el ancho y alto de los elementos */
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #007BFF;
+            color: white;
+            padding: 10px 20px; /* Ajuste de padding */
+            height: 60px; /* Altura del encabezado */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Asegura que el encabezado esté siempre arriba */
+        }
+        header .logo h1 {
+            margin: 0;
+            font-size: 20px; /* Ajuste de tamaño de fuente */
+            color: #fff;
+        }
+        header nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        header nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        header nav ul li {
+            margin-left: 20px;
+        }
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px; /* Ajuste de tamaño de fuente */
+            transition: color 0.3s;
+        }
+        header nav ul li a:hover {
+            color: #FFD700;
+        }
+        
+        footer {
+            width: 100%;
+            background-color: #222;
+            color: #ccc;
+            padding: 20px; /* Cambiado a 20px para un espaciado más consistente */
+            font-size: 14px;
+            position: relative;
+            margin-top: auto; /* Asegura que el pie de página esté al final */
+        }
+        .container {
+            padding: 20px;
+            margin-top: 80px; /* Ajuste del margen superior para evitar la superposición con el header */
+        }
+        .section {
+            background-color: #fff; /* Fondo blanco para secciones de contenido */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        }
+        .footer-top {
+            padding-bottom: 20px;
+        }
+        .footer-columns {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1100px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .footer-column {
+            width: auto;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .footer-column h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 20px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        .footer-bottom {
+            background-color: #2c3e50; /* Color de fondo oscuro */
+            color: white; /* Color del texto */
+            padding: 20px; /* Espaciado interior */
+            text-align: center; /* Alinear el texto al centro */
+            position: relative; /* Para el posicionamiento de elementos */
+            bottom: 0; /* Mantener en la parte inferior */
+            width: 100%; /* Ancho completo */
+        }
+        .footer-bottom p {
+            margin: 0; /* Sin margen */
+            font-size: 14px; /* Tamaño de fuente */
+        }
+        .footer-links {
+            list-style-type: none; /* Sin viñetas */
+            padding: 0; /* Sin relleno */
+            margin: 10px 0 0; /* Margen superior */
+        }
+        .footer-links li {
+            display: inline; /* Mostrar en línea */
+            margin: 0 15px; /* Espaciado entre enlaces */
+        }
+        .footer-links a {
+            color: #ecf0f1; /* Color del enlace */
+            text-decoration: none; /* Sin subrayado */
+            transition: color 0.3s; /* Transición para el hover */
+        }
+        .footer-links a:hover {
+            color: #3498db; /* Color en hover */
+        }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    padding: 10px;
+    top: 50px; /* Alineación debajo del encabezado */
+    left: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+html, body {
+            height: auto;
+            overflow-x: hidden; /* Evitar scroll horizontal */
+            margin: 0;
+            padding: 20;
+        }
+        header {
+            background: #343a40; /* Color de fondo */
+            color: white; /* Color del texto */
+            padding: 10px 20px; /* Espaciado */
+        }
+        footer {
+            background: #343a40; /* Color de fondo */
+            color: white; /* Color del texto */
+            padding: 20px; /* Espaciado */
+            position: relative; /* Asegurar que el footer se comporte normalmente */
+        }
+        .terms-container {
+            padding: 20px; /* Espaciado dentro del contenedor de términos */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"></div>
+        <h1 style="font-size: 20px; margin: 0;">
+            <a href="index.html" style="text-decoration: none; color: inherit;">Travelers World</a>
+        </h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+                <li><a href="beneficios.html">Hazte Socio</a></li>
+                <li class="dropdown" id="user-dropdown">
+                    <span id="greeting" class="greeting"><a href="inicio.html" style="color: white; text-decoration: none;">Iniciar Sesión</a></span>
+                    <div class="dropdown-content" id="user-menu">
+                        <a href="perfil.html">Mi perfil</a>
+                        <a href="#" id="logout-btn">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+            <i class="bi bi-three-dots"></i>
+        </nav>
+    </header>
+
+<div class="container">
+    <div class="section">
+        <h2>1. Introducción</h2>
+        <p>En Travelers World, valoramos tu privacidad y estamos comprometidos a proteger tu información personal. Esta política describe cómo recopilamos, utilizamos y compartimos tu información cuando usas nuestros servicios.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. Nuestro Compromiso con los Usuarios</h2>
+        <p>En Travelers World, nos comprometemos a brindar una experiencia excepcional a nuestros usuarios. Este compromiso se refleja en varios aspectos clave:</p>
+        <ul>
+            <li><strong>Transparencia:</strong> Mantenemos una comunicación clara y honesta sobre cómo recopilamos y utilizamos tus datos personales.</li>
+            <li><strong>Seguridad:</strong> Implementamos las mejores prácticas y tecnologías de seguridad para proteger tu información personal contra accesos no autorizados.</li>
+            <li><strong>Atención Personalizada:</strong> Ofrecemos atención al cliente de calidad, con agentes capacitados disponibles para resolver tus dudas y brindar asistencia personalizada.</li>
+            <li><strong>Mejora Continua:</strong> Nos esforzamos por mejorar constantemente nuestros servicios y procesos en función de la retroalimentación de nuestros usuarios.</li>
+            <li><strong>Protección de Datos:</strong> Cumplimos con todas las normativas locales e internacionales en materia de protección de datos para garantizar tus derechos como usuario.</li>
+            <li><strong>Calidad en Servicios:</strong> Nos comprometemos a ofrecer servicios de alta calidad que se adapten a tus necesidades y expectativas en cada viaje.</li>
+            <li><strong>Facilidad de Uso:</strong> Diseñamos nuestra plataforma para que sea intuitiva y fácil de navegar, permitiéndote realizar reservas de manera rápida y sencilla.</li>
+            <li><strong>Responsabilidad Social:</strong> Promovemos prácticas sostenibles y responsables en la industria de viajes, apoyando a comunidades locales y protegiendo el medio ambiente.</li>
+            <li><strong>Acceso a Información:</strong> Te proporcionamos información clara y accesible sobre nuestras políticas, precios y servicios, permitiéndote tomar decisiones informadas.</li>
+            <li><strong>Compromiso con la Experiencia del Cliente:</strong> Nos dedicamos a asegurarnos de que tu experiencia de viaje sea memorable, desde la planificación hasta el retorno a casa.</li>
+            <li><strong>Canales de Comunicación Abiertos:</strong> Mantenemos varios canales de comunicación para que puedas contactarnos fácilmente y recibir respuesta a tus inquietudes.</li>
+            <li><strong>Respeto por la Privacidad:</strong> Valoramos tu privacidad y nos comprometemos a no vender, alquilar ni compartir tu información personal con terceros sin tu consentimiento.</li>
+            <li><strong>Ofertas Personalizadas:</strong> Utilizamos tus preferencias y datos de viaje para ofrecerte promociones y servicios adaptados a tus necesidades.</li>
+            <li><strong>Solución de Conflictos:</strong> Contamos con un proceso claro para resolver cualquier problema que pueda surgir durante tu viaje, garantizando tu satisfacción.</li>
+            <li><strong>Compromiso Legal:</strong> Aseguramos que nuestras operaciones cumplan con las leyes y regulaciones aplicables, manteniendo la integridad de nuestros servicios.</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>3. Definiciones Importantes</h2>
+        <p>Para facilitar la comprensión de esta política, se definen los siguientes términos:</p>
+        <ul>
+            <li><strong>Datos Personales:</strong> Información que identifica o puede identificar a una persona.</li>
+            <li><strong>Tratamiento:</strong> Cualquier operación realizada con los datos personales.</li>
+            <li><strong>Cookies:</strong> Archivos que se instalan en tu dispositivo para recopilar información.</li>
+            <li><strong>Usuario:</strong> Persona que utiliza nuestros servicios.</li>
+            <li><strong>Proveedor de Servicios:</strong> Terceros que ofrecen servicios en nuestro nombre.</li>
+            <li><strong>Consentimiento:</strong> Aprobación clara y afirmativa para el uso de datos personales.</li>
+            <li><strong>Derechos ARCO:</strong> Derechos de acceso, rectificación, cancelación y oposición.</li>
+            <li><strong>Base Legal:</strong> Justificación legal para el tratamiento de datos personales.</li>
+            <li><strong>Registro de Actividades:</strong> Documento que detalla cómo se procesan los datos.</li>
+            <li><strong>Anonimización:</strong> Proceso de eliminar datos personales para proteger la identidad.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Información que Recopilamos</h2>
+        <p>Recopilamos información de diversas formas, incluyendo:</p>
+        <ul>
+            <li><strong>Datos de Registro:</strong> Información que proporcionas al crear una cuenta.</li>
+            <li><strong>Datos de Reserva:</strong> Información sobre tus reservas y preferencias de viaje.</li>
+            <li><strong>Información de Pago:</strong> Detalles necesarios para procesar pagos.</li>
+            <li><strong>Datos de Contacto:</strong> Correo electrónico, número de teléfono y dirección.</li>
+            <li><strong>Información Técnica:</strong> Datos sobre tu dispositivo y conexión a internet.</li>
+            <li><strong>Interacciones:</strong> Registros de tus interacciones con nuestro sitio y servicios.</li>
+            <li><strong>Preferencias de Marketing:</strong> Datos sobre tus preferencias en comunicaciones.</li>
+            <li><strong>Opiniones y Comentarios:</strong> Información que compartes a través de encuestas y reseñas.</li>
+            <li><strong>Datos de Redes Sociales:</strong> Información de tu perfil si inicias sesión a través de redes sociales.</li>
+            <li><strong>Datos de Geolocalización:</strong> Información sobre tu ubicación si la activas.</li>
+            <li><strong>Datos de Navegación:</strong> Información sobre tu comportamiento en línea y preferencias.</li>
+            <li><strong>Datos de Clientes:</strong> Información de nuestros clientes que puede ser relevante para el servicio.</li>
+            <li><strong>Datos de Seguimiento:</strong> Información sobre el uso de nuestros servicios para mejorar la experiencia.</li>
+            <li><strong>Datos de Seguridad:</strong> Información sobre incidentes de seguridad y violaciones.</li>
+            <li><strong>Datos de Atención al Cliente:</strong> Registros de tus consultas y quejas.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Uso de la Información</h2>
+        <p>Utilizamos la información que recopilamos para:</p>
+        <ul>
+            <li><strong>Proveer Servicios:</strong> Facilitar y administrar tus reservas y viajes.</li>
+            <li><strong>Mejorar Nuestros Servicios:</strong> Analizar el uso para optimizar la experiencia del usuario.</li>
+            <li><strong>Enviar Confirmaciones:</strong> Informarte sobre el estado de tus reservas y cambios.</li>
+            <li><strong>Atención al Cliente:</strong> Responder a tus preguntas e inquietudes sobre nuestros servicios.</li>
+            <li><strong>Marketing:</strong> Enviarte promociones y ofertas personalizadas.</li>
+            <li><strong>Investigación:</strong> Realizar estudios de mercado para mejorar nuestros servicios.</li>
+            <li><strong>Seguridad:</strong> Proteger tu información y prevenir fraudes.</li>
+            <li><strong>Comunicaciones:</strong> Mantenerte informado sobre cambios en nuestras políticas.</li>
+            <li><strong>Gestión de Cuenta:</strong> Administrar tu cuenta y permitirte acceder a tus datos.</li>
+            <li><strong>Segmentación:</strong> Agrupar usuarios para análisis y marketing efectivo.</li>
+            <li><strong>Evaluaciones de Servicio:</strong> Evaluar la calidad de los servicios proporcionados.</li>
+            <li><strong>Mejoras Técnicas:</strong> Implementar mejoras tecnológicas en nuestra plataforma.</li>
+            <li><strong>Actualizaciones de Productos:</strong> Notificarte sobre nuevos servicios y funciones.</li>
+            <li><strong>Colaboraciones:</strong> Trabajar con socios comerciales para ofrecer servicios complementarios.</li>
+            <li><strong>Estadísticas:</strong> Crear informes y análisis sobre el uso de nuestra plataforma.</li>
+            <li><strong>Cumplimiento Legal:</strong> Asegurar que nuestras operaciones cumplan con la ley.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Derechos del Usuario</h2>
+        <p>Tienes los siguientes derechos en relación con tus datos personales:</p>
+        <ul>
+            <li><strong>Acceso:</strong> Solicitar acceso a la información que tenemos sobre ti.</li>
+            <li><strong>Rectificación:</strong> Solicitar la corrección de información inexacta.</li>
+            <li><strong>Cancelación:</strong> Solicitar la eliminación de tus datos personales.</li>
+            <li><strong>Oposición:</strong> Oponerte al tratamiento de tus datos en ciertas circunstancias.</li>
+            <li><strong>Portabilidad:</strong> Solicitar que tu información se transfiera a otro proveedor.</li>
+            <li><strong>Revocación:</strong> Retirar tu consentimiento para el tratamiento de datos.</li>
+            <li><strong>Limitación:</strong> Solicitar que se limite el tratamiento de tus datos en ciertas situaciones.</li>
+            <li><strong>Acceso a Información Adicional:</strong> Solicitar más información sobre el uso de tus datos.</li>
+            <li><strong>Instrucciones Especiales:</strong> Indicar cómo deseas que se manejen tus datos después de tu fallecimiento.</li>
+            <li><strong>Notificación de Cambios:</strong> Ser notificado sobre cambios que afecten tus derechos.</li>
+            <li><strong>Solicitudes a Terceros:</strong> Permitir que otros accedan a tu información con tu consentimiento.</li>
+            <li><strong>Consulta de Seguridad:</strong> Consultar sobre medidas de seguridad aplicadas a tus datos.</li>
+            <li><strong>Acceso a Documentación:</strong> Obtener copias de documentos que acrediten el tratamiento de tus datos.</li>
+            <li><strong>Recursos Judiciales:</strong> Buscar recursos legales si consideras que tus derechos han sido vulnerados.</li>
+            <li><strong>Notificación de Violaciones:</strong> Ser notificado en caso de violaciones de seguridad que afecten tus datos.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>7. Uso de Cookies</h2>
+        <p>Utilizamos cookies para mejorar tu experiencia. A continuación se detallan los tipos de cookies que utilizamos:</p>
+        <ul>
+            <li><strong>Cookies Esenciales:</strong> Necesarias para el funcionamiento del sitio.</li>
+            <li><strong>Cookies de Rendimiento:</strong> Recopilan información sobre cómo usas el sitio.</li>
+            <li><strong>Cookies Funcionales:</strong> Permiten recordar tus preferencias y ajustes.</li>
+            <li><strong>Cookies de Publicidad:</strong> Utilizadas para mostrar anuncios relevantes para ti.</li>
+            <li><strong>Cookies de Terceros:</strong> Colocadas por servicios de terceros en nuestro sitio.</li>
+            <li><strong>Cookies Persistentes:</strong> Permanecen en tu dispositivo por un periodo prolongado.</li>
+            <li><strong>Cookies de Sesión:</strong> Se eliminan al cerrar el navegador.</li>
+            <li><strong>Cookies de Análisis:</strong> Para analizar el tráfico y uso de la web.</li>
+            <li><strong>Cookies de Seguimiento:</strong> Para rastrear la actividad de los usuarios en el sitio.</li>
+            <li><strong>Cookies de Redes Sociales:</strong> Facilitan compartir contenido en redes sociales.</li>
+            <li><strong>Cookies de Localización:</strong> Para proporcionar contenido basado en tu ubicación.</li>
+            <li><strong>Cookies de Seguridad:</strong> Para proteger la integridad de tu sesión.</li>
+            <li><strong>Cookies de Personalización:</strong> Para ofrecer una experiencia personalizada.</li>
+            <li><strong>Consentimiento de Cookies:</strong> Guardamos tu consentimiento para el uso de cookies.</li>
+            <li><strong>Configuración de Cookies:</strong> Puedes gestionar tus preferencias de cookies en tu navegador.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Preguntas y Respuestas sobre el Uso de Información</h2>
+        <p>Respondemos a las preguntas frecuentes sobre el uso de tu información:</p>
+        <ul>
+            <li><strong>¿Por qué recopilamos tus datos?</strong> Para ofrecerte servicios de calidad y mejorar tu experiencia.</li>
+            <li><strong>¿Cómo usamos tus datos?</strong> Utilizamos tus datos para procesar reservas y enviarte ofertas personalizadas.</li>
+            <li><strong>¿Con quién compartimos tus datos?</strong> Compartimos información con proveedores de servicios para cumplir con tu solicitud.</li>
+            <li><strong>¿Cómo protegen tus datos?</strong> Implementamos medidas de seguridad para proteger tu información personal.</li>
+            <li><strong>¿Puedo acceder a mis datos?</strong> Sí, puedes solicitar acceso a la información que tenemos sobre ti.</li>
+            <li><strong>¿Qué pasa si no quiero que se utilicen mis datos?</strong> Puedes retirar tu consentimiento en cualquier momento.</li>
+            <li><strong>¿Se realizan cambios a esta política?</strong> Sí, te informaremos sobre cualquier cambio significativo.</li>
+            <li><strong>¿Cómo puedo contactarte?</strong> Puedes contactarnos a través de nuestro correo electrónico o teléfono.</li>
+            <li><strong>¿Cuánto tiempo se retienen mis datos?</strong> Retenemos tus datos solo el tiempo necesario para cumplir con nuestros propósitos.</li>
+            <li><strong>¿Qué derechos tengo sobre mis datos?</strong> Tienes derechos de acceso, rectificación, cancelación y oposición.</li>
+            <li><strong>¿Utilizan cookies?</strong> Sí, utilizamos cookies para mejorar tu experiencia en el sitio.</li>
+            <li><strong>¿Cómo puedo eliminar mis datos?</strong> Puedes solicitar la eliminación de tus datos en cualquier momento.</li>
+            <li><strong>¿Qué hago si tengo una queja?</strong> Puedes presentar una queja ante las autoridades de protección de datos.</li>
+            <li><strong>¿Cómo se manejan los datos de menores?</strong> No recopilamos intencionadamente datos de menores sin consentimiento.</li>
+            <li><strong>¿Qué información se considera sensible?</strong> Datos como origen racial, opiniones políticas o salud son considerados sensibles.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Cambios a Esta Política</h2>
+        <p>Nos reservamos el derecho de modificar esta política. Te notificaremos sobre cambios importantes mediante:</p>
+        <ul>
+            <li><strong>Actualizaciones en el Sitio:</strong> Publicaremos la versión actualizada en nuestra página web.</li>
+            <li><strong>Correo Electrónico:</strong> Enviaremos notificaciones a tu dirección de correo registrada.</li>
+            <li><strong>Mensajes en la Aplicación:</strong> Notificaremos cambios a través de nuestra aplicación móvil.</li>
+            <li><strong>Anuncios en Redes Sociales:</strong> Compartiremos información en nuestras plataformas sociales.</li>
+            <li><strong>Comunicación Directa:</strong> Contactaremos a los usuarios afectados directamente si es necesario.</li>
+            <li><strong>Consulta a Autoridades:</strong> Informaremos a las autoridades competentes si los cambios son significativos.</li>
+            <li><strong>Fecha de Vigencia:</strong> Indiqueremos la fecha de entrada en vigor de cada modificación.</li>
+            <li><strong>Feedback de Usuarios:</strong> Aceptaremos comentarios sobre las modificaciones realizadas.</li>
+            <li><strong>Historial de Cambios:</strong> Mantendremos un registro de las versiones anteriores de la política.</li>
+            <li><strong>Consentimiento a Cambios:</strong> Tu uso continuado de nuestros servicios implica aceptación de los cambios realizados.</li>
+            <li><strong>Claridad en Cambios:</strong> Nos esforzamos por explicar claramente cómo cada cambio afecta tus derechos.</li>
+            <li><strong>Consulta a Autoridades:</strong> Cualquier modificación que impacte derechos de privacidad se discutirá con autoridades competentes.</li>
+            <li><strong>Comunicaciones Adicionales:</strong> Se informará sobre cambios relevantes en nuestras campañas de marketing.</li>
+            <li><strong>Evaluación de Impacto:</strong> Realizaremos evaluaciones de impacto cuando sea necesario al modificar la política.</li>
+            <li><strong>Consistencia:</strong> Nos aseguramos de que nuestras políticas sean consistentes con las normativas vigentes.</li>
+        </ul>
+    </div>
+
+    <div class="section contact-info">
+        <h2>10. Contacto</h2>
+        <p>Si tienes preguntas, inquietudes o solicitudes relacionadas con esta política, no dudes en contactarnos:</p>
+        <ul>
+            <li><strong>Correo Electrónico:</strong> contacto@travelersworld.com</li>
+            <li><strong>Teléfono:</strong> +593 123 456 789</li>
+            <li><strong>Dirección:</strong> Avenida de la Independencia, Quito, Ecuador</li>
+            <li><strong>Horarios:</strong> Lunes a Viernes de 9:00 a 18:00</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Acerca de Nosotros</h3>
+                <ul>
+                    <li><a href="nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="mision.html">Misión</a></li>
+                    <li><a href="vision.html">Visión</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="vuelos.html">Vuelos</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                    <li><a href="paquetes.html">Paquetes turísticos</a></li>
+                    <li><a href="actividades.html">Actividades</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul>
+                    <li><a href="ayuda.html">Centro de ayuda</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Síguenos</h3>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://www.instagram.com/travelers_world24/"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travelers World. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="politicas.html">Política de privacidad</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

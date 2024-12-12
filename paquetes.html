@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Hoteles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px; 
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .search-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .search-section input, .search-section select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hotel-results {
+            display: flex;
+            overflow-x: auto; /* Permite desplazamiento horizontal */
+            gap: 15px; /* Espaciado entre tarjetas */
+        }
+        .hotel-card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            flex: 0 0 auto; /* Para evitar que se ajuste automáticamente al ancho */
+            width: 300px; /* Ancho fijo de las tarjetas */
+            transition: transform 0.2s;
+        }
+        .hotel-card:hover {
+            background-color: #e9ecef;
+            transform: scale(1.02); /* Aumento al pasar el ratón */
+        }
+        .hotel-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .hotel-card h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: #333;
+        }
+        .hotel-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .hotel-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .hotel-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Búsqueda de Hoteles</h1>
+
+        <div class="search-section">
+            <div class="city-select">
+                <select id="origin">
+                    <option value="">Seleccione Ciudad de Origen</option>
+                    <option value="Quito">Quito</option>
+                    <option value="Guayaquil">Guayaquil</option>
+                    <option value="Cuenca">Cuenca</option>
+                    <option value="Loja">Loja</option>
+                </select>
+            </div>
+            <div class="city-select">
+                <select id="destination">
+                    <option value="">Seleccione Ciudad de Destino</option>
+                    <option value="Quito">Quito</option>
+                    <option value="Guayaquil">Guayaquil</option>
+                    <option value="Cuenca">Cuenca</option>
+                    <option value="Galápagos">Galápagos</option>
+                    <option value="Manta">Manta</option>
+                    <option value="Loja">Loja</option>
+                </select>
+            </div>
+            <input type="date" id="checkin" placeholder="Fecha de Entrada">
+            <input type="date" id="checkout" placeholder="Fecha de Salida">
+            <input type="number" id="passengers" placeholder="Número de Pasajeros" min="1">
+            <button onclick="searchHotels()">Buscar</button>
+        </div>
+
+        <div class="hotel-results" id="hotelResults"></div> <!-- Contenedor para resultados de búsqueda -->
+    </div>
+
+    <script>
+        function searchHotels() {
+            const destination = document.getElementById('destination').value;
+            const hotelResults = document.getElementById('hotelResults');
+
+            // Limpiar resultados anteriores
+            hotelResults.innerHTML = '';
+
+            // Ejemplo de hoteles según la ciudad buscada
+            const hotels = {
+                Quito: [
+                    { name: 'Hotel Quito Plaza', description: 'Un hotel moderno en el centro de Quito.', rating: '★★★★☆', image: 'hotel.jfif' },
+                    { name: 'Hotel Andino', description: 'Alojamiento acogedor con vista a las montañas.', rating: '★★★☆☆', image: 'andino.jpg' },
+                ],
+                Guayaquil: [
+                    { name: 'Hotel Guayaquil Inn', description: 'Hotel de lujo con piscina y gimnasio.', rating: '★★★★☆', image: 'lnn.jpg' },
+                    { name: 'Hotel Continental', description: 'Ubicación ideal en el centro de Guayaquil.', rating: '★★★☆☆', image: 'continental.jfif' },
+                ],
+                Cuenca: [
+                    { name: 'Hotel Cuenca Palace', description: 'Un hotel elegante en el corazón de Cuenca.', rating: '★★★★☆', image: 'palace.jpg' },
+                    { name: 'Hotel Casa de la Abuela', description: 'Hotel familiar con encanto colonial.', rating: '★★★☆☆', image: 'abuela.jfif' },
+                ],
+                Galápagos: [
+                    { name: 'Hotel Golden Bay Galapagos', description: 'Hotel frente al mar en las Galápagos.', rating: '★★★★☆', image: 'bay.jfif' },
+                    { name: 'Hotel Isla del Sol', description: 'Alojamiento exclusivo en la isla.', rating: '★★★☆☆', image: 'sol.jfif' },
+                ],
+                Manta: [
+                    { name: 'Hotel Manta Mar', description: 'Hotel de playa con todas las comodidades.', rating: '★★★★☆', image: 'mar.jfif' },
+                    { name: 'Hotel Oro Verde', description: 'Cerca de la playa y del centro comercial.', rating: '★★★☆☆', image: 'manta3.jfif' },
+                ],
+                Loja: [
+                    { name: 'Hotel San Francisco', description: 'Hotel boutique con estilo único.', rating: '★★★★☆', image: 'san.jfif' },
+                    { name: 'Hotel Hostal Plaza Del Valle', description: 'Ubicación céntrica y excelente servicio.', rating: '★★★☆☆', image: 'plaza.jfif' },
+                ],
+            };
+
+            // Mostrar hoteles disponibles según la ciudad seleccionada
+            if (hotels[destination]) {
+                hotels[destination].forEach((hotel, index) => {
+                    const hotelCard = document.createElement('div');
+                    hotelCard.className = 'hotel-card';
+                    hotelCard.innerHTML = `
+                        <h3>${hotel.name}</h3>
+                        <p>${hotel.description}</p>
+                        <p>Valoración: ${hotel.rating}</p>
+                        <img src="${hotel.image}" alt="${hotel.name}">
+                        <button onclick="selectHotel('${destination}', ${index})">Seleccionar</button>
+                    `;
+                    hotelResults.appendChild(hotelCard);
+                });
+            } else {
+                hotelResults.innerHTML = '<p>Por favor, seleccione una ciudad de destino.</p>';
+            }
+        }
+
+        function selectHotel(destination, index) {
+            sessionStorage.setItem('selectedHotelIndex', index);
+            sessionStorage.setItem('selectedHotelDestination', destination);
+            window.location.href = 'paquetefactu.html';
+        }
+    </script>
+</body>
+</html>

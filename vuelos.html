@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Vuelos - Ecuador</title>
+    <link rel="stylesheet" href="vuelo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+        /* Asegúrate de que el menú esté oculto por defecto */
+        .dropdown-content {
+            display: none; /* Menú oculto por defecto */
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        /* Estilo del texto en negro */
+        #greeting a {
+            color: black; /* Cambia el color del texto a negro */
+            text-decoration: none; /* Elimina el subrayado del enlace */
+        }
+
+        /* Estilos para las ciudades populares */
+        #popular-cities {
+            margin-top: 20px;
+            text-align: center; /* Centrar el título */
+        }
+
+        .city-cards {
+            display: flex; /* Usar flexbox para alinear las tarjetas */
+            justify-content: center; /* Centrar las tarjetas horizontalmente */
+            gap: 15px; /* Espacio entre las tarjetas */
+            flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan si no caben en una fila */
+        }
+
+        .city-card {
+            position: relative;
+            width: 150px; /* Ancho fijo para las tarjetas */
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra para las tarjetas */
+        }
+
+        .city-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .city-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .city-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .flight-results {
+            margin-top: 20px;
+        }
+
+        .flight-card {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .flight-card img {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .flight-info {
+            flex-grow: 1;
+        }
+
+        .flight-info button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .flight-info button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            width: 100%;
+            background-color: #222;
+            color: #ccc;
+            padding: auto;
+            font-size: 14px;
+            position: relative;
+            margin-top: auto; /* Asegura que el pie de página esté al final */
+        }
+        .footer-top {
+            padding-bottom: 20px;
+        }
+        .footer-columns {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1100px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .footer-column {
+            width: auto;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .footer-column h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 20px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 10;
+            padding: 10px;
+            top: 50px; /* Alineación debajo del encabezado */
+            left: 0;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .footer-bottom {
+    background-color: #2c3e50; /* Color de fondo oscuro */
+    color: white; /* Color del texto */
+    padding: 20px; /* Espaciado interior */
+    text-align: center; /* Alinear el texto al centro */
+    position: relative; /* Para el posicionamiento de elementos */
+    bottom: 0; /* Mantener en la parte inferior */
+    width: 100%; /* Ancho completo */
+}
+
+.footer-bottom p {
+    margin: 0; /* Sin margen */
+    font-size: 14px; /* Tamaño de fuente */
+}
+
+.footer-links {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin relleno */
+    margin: 10px 0 0; /* Margen superior */
+}
+
+.footer-links li {
+    display: inline; /* Mostrar en línea */
+    margin: 0 15px; /* Espaciado entre enlaces */
+}
+
+.footer-links a {
+    color: #ecf0f1; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s; /* Transición para el hover */
+}
+
+.footer-links a:hover {
+    color: #3498db; /* Color en hover */
+}
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1 style="font-size: 20px; margin: 0;">
+            <a href="index.html" style="text-decoration: none; color: inherit;">Travelers World</a>
+        </h1>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+            <li><a href="beneficios.html">Hazte Socio</a></li>
+            <li class="dropdown" id="user-dropdown">
+                <span id="greeting" class="greeting" style="cursor: pointer;"><a href="javascript:void(0);">Iniciar Sesión</a></span>
+                <div class="dropdown-content" id="user-menu">
+                    <span id="user-name">Usuario</span>
+                    <a href="favoritos.html">Favoritos</a>
+                    <a href="perfil.html">Mi perfil</a>
+                    <a href="#" id="logout-btn">Cerrar sesión</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<nav id="sidebar">
+    <ul>
+        <li><a href="vuelos.html"><i class="fas fa-plane"></i><br>Vuelos</a></li>
+        <li><a href="hoteles.html"><i class="fas fa-bed"></i><br>Hoteles</a></li>
+        <li><a href="paquetes.html"><i class="fas fa-suitcase-rolling"></i><br>Paquetes</a></li>
+        <li><a href="actividades.html"><i class="fas fa-hiking"></i><br>Actividades</a></li>
+    </ul>
+</nav>
+<div class="content">
+    <div class="trip_bx">
+        <div class="search_bx">
+            <div class="card">
+                <h4>Lugar de Origen</h4>
+                <input type="text" id="origin" placeholder="Ingresa tu ciudad de origen" required>
+            </div>
+            <div class="card">
+                <h4>Destino</h4>
+                <select id="destination" required>
+                    <option value="">Selecciona una ciudad</option>
+                    <option value="Quito">Quito</option>
+                    <option value="Guayaquil">Guayaquil</option>
+                    <option value="Cuenca">Cuenca</option>
+                    <option value="Manta">Manta</option>
+                    <option value="Loja">Loja</option>
+                    <option value="Esmeraldas">Esmeraldas</option>
+                </select>
+            </div>
+            <div class="card">
+                <h4>Fecha de Salida</h4>
+                <input type="date" id="departure-date" required>
+            </div>
+            <div class="card">
+                <input type="button" value="Buscar" class="explore-button" onclick="searchFlights()">
+            </div>
+        </div>
+
+        <!-- Ciudades Populares -->
+        <div id="popular-cities">
+            <h3>Ciudades Populares de Ecuador</h3>
+            <div class="city-cards">
+                <div class="city-card" onclick="selectCity('Quito')">
+                    <img src="quito.jpg" alt="Quito">
+                    <div class="city-name">Quito</div>
+                </div>
+                <div class="city-card" onclick="selectCity('Guayaquil')">
+                    <img src="guayaquil.jfif" alt="Guayaquil">
+                    <div class="city-name">Guayaquil</div>
+                </div>
+                <div class="city-card" onclick="selectCity('Cuenca')">
+                    <img src="cuenca2.jfif" alt="Cuenca">
+                    <div class="city-name">Cuenca</div>
+                </div>
+                <div class="city-card" onclick="selectCity('Manta')">
+                    <img src="manta.jfif" alt="Manta">
+                    <div class="city-name">Manta</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados de Vuelos -->
+        <div id="flight-results" class="flight-results"></div>
+    </div>
+</div>
+<footer>
+    <div class="footer-top">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Acerca de Nosotros</h3>
+                <ul>
+                    <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="mision.html">Misión </a></li>
+                    <li><a href="vision.html">Vision</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="vuelos.html">Vuelos</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                    <li><a href="paquetes.html">Paquetes Turísticos</a></li>
+                    <li><a href="actividades.html">Actividades</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul>
+                    <li><a href="ayuda.html">Centro de ayuda</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Siguenos</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="https://www.instagram.com/travelers_world24/">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travelers World. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="politicas.html">Política de privacidad</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    function reservarVuelo(vuelo) {
+    // Obtener las reservas actuales del localStorage
+    let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+
+    // Crear un objeto con la información del vuelo seleccionado
+    const nuevaReserva = {
+        id: vuelo.id,
+        tipo: vuelo.tipo,  // El tipo o nombre del vuelo
+        personas: vuelo.personas,  // Capacidad o número de personas
+        precio: vuelo.precio,  // Precio por vuelo
+        descripcion: vuelo.descripcion  // Descripción adicional
+    };
+
+    // Añadir la nueva reserva a la lista de reservas
+    reservas.push(nuevaReserva);
+
+    // Guardar las reservas actualizadas en localStorage
+    localStorage.setItem('reservas', JSON.stringify(reservas));
+
+    alert("Reserva guardada correctamente.");
+}
+
+    // Verificar el nombre de usuario en localStorage
+    const userName = localStorage.getItem('userName');
+    const greetingElement = document.getElementById('greeting');
+    const userMenu = document.getElementById('user-menu');
+
+    if (userName) {
+        greetingElement.innerHTML = userName; // Mostrar nombre de usuario
+        document.getElementById('user-name').innerText = userName; // Mostrar en el menú desplegable
+    }
+
+    greetingElement.addEventListener('click', function() {
+        // Alternar la visibilidad del menú al hacer clic
+        userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        localStorage.removeItem('userName'); // Eliminar el nombre de usuario
+        greetingElement.innerHTML = '<a href="inicio.html">Iniciar Sesión</a>'; // Cambiar a enlace
+        document.getElementById('user-name').innerText = 'Usuario'; // Restablecer nombre en el menú
+        userMenu.style.display = 'none'; // Ocultar el menú desplegable
+    });
+
+    // Cerrar el menú si se hace clic fuera de él
+    window.addEventListener('click', function(event) {
+        if (!document.getElementById('user-dropdown').contains(event.target)) {
+            userMenu.style.display = 'none'; // Ocultar el menú si se hace clic fuera
+        }
+    });
+
+    function selectCity(city) {
+        document.getElementById('destination').value = city;
+        searchFlights();
+    }
+
+    function searchFlights() {
+        const origin = document.getElementById('origin').value;
+        const destination = document.getElementById('destination').value;
+        const departureDate = document.getElementById('departure-date').value;
+
+        if (!origin || !destination || !departureDate) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+
+        // Ocultar Ciudades Populares al buscar
+        document.getElementById('popular-cities').style.display = 'none';
+
+        const availableFlights = [
+            {
+                airline: 'Avianca',
+                image: 'avianca.png',
+                layover: 'Directo',
+                time: '09:00 AM',
+                price: '$150'
+            },
+            {
+                airline: 'LATAM',
+                image: 'latam.jfif',
+                layover: 'Escala en Quito',
+                time: '10:30 AM',
+                price: '$200'
+            },
+            {
+                airline: 'TAME',
+                image: 'tame.png',
+                layover: 'Directo',
+                time: '02:15 PM',
+                price: '$180'
+            }
+        ];
+
+        const resultsContainer = document.getElementById('flight-results');
+        resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+
+        availableFlights.forEach(flight => {
+            const flightCard = document.createElement('div');
+            flightCard.className = 'flight-card';
+            flightCard.innerHTML = `
+                <img src="${flight.image}" alt="${flight.airline}">
+                <div class="flight-info">
+                    <h4>${flight.airline}</h4>
+                    <p>${flight.layover}</p>
+                    <p>Hora: ${flight.time}</p>
+                    <p>Precio: ${flight.price}</p>
+                    <button onclick="bookFlight('${flight.airline}')">Reservar</button>
+                </div>
+            `;
+            resultsContainer.appendChild(flightCard);
+        });
+    }
+
+    function bookFlight(airline) {
+        alert(`Has reservado un vuelo con ${airline}.`);
+    }
+</script>
+</body>
+</html>

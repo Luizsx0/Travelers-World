@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago</title>
+    <link rel="stylesheet" href="pagos.css">
+</head>
+<body>
+    <section class="payment-section">
+        <h1>Proceso de Pago</h1>
+        <p>Por favor, completa el pago a través de PayPal.</p>
+        <div class="payment-container">
+            <form action="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-0RV56604EU033993KM3XDW5Y" method="post">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-0RV56604EU033993KM3XDW5Y">
+                <div id="paypal-button-container-P-03100635AP2586011M3XEKJY"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AaFRtwFqo9WcMbBUYVT93lsEEWlA2Xj7oVw6C1QOTIuw9EDdw2V6ePPAEtQ8yb8TPsZ2qFzLX4Ft3avv&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'paypal'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-03100635AP2586011M3XEKJY'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-03100635AP2586011M3XEKJY'); // Renders the PayPal button
+</script>
+                <input type="hidden" name="item_name" value="Maestro de los caminos">
+                <input type="hidden" name="amount" value="79.99">
+                <input type="hidden" name="currency_code" value="USD">
+                
+            </form>
+        </div>
+        <p class="note">Si tienes problemas con el pago, contacta con nuestro soporte.</p>
+    </section>
+</body>
+</html>

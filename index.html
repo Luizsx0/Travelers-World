@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelers World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box; /* Asegura que el padding y el margen no afecten el ancho y alto de los elementos */
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            height: 100vh; /* Altura total de la pantalla */
+            overflow: hidden; /* Oculta el desplazamiento innecesario */
+            display: flex;
+            flex-direction: column; /* Usar flexbox para organizar el contenido */
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #007BFF;
+            color: white;
+            padding: 10px 20px; /* Ajuste de padding */
+            height: 60px; /* Altura del encabezado */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Asegura que el encabezado esté siempre arriba */
+        }
+        header .logo h1 {
+            margin: 0;
+            font-size: 20px; /* Ajuste de tamaño de fuente */
+            color: #fff;
+        }
+        header nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        header nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        header nav ul li {
+            margin-left: 20px;
+        }
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px; /* Ajuste de tamaño de fuente */
+            transition: color 0.3s;
+        }
+        header nav ul li a:hover {
+            color: #FFD700;
+        }
+        nav#sidebar {
+            background: #fff;
+            width: 100%; /* Ancho del menú lateral */
+            height: 200px; /* Ajuste del alto */
+            display: flex; /* Estructura horizontal */
+            align-items: center; /* Centrado vertical */
+            padding: 0 20px; /* Espaciado interno */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 60px; /* Ajuste para bajar más el menú */
+            position: relative; /* Permite que el contenido se superponga si es necesario */
+            z-index: 999; /* Asegura que el menú esté encima de otros elementos */
+        }
+        nav#sidebar ul {
+            display: flex; /* Estructura horizontal */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1; /* Llenar el espacio disponible */
+            justify-content: space-around; /* Espacio igual entre los elementos */
+        }
+        nav#sidebar a {
+            color: golden;
+            padding: 10px; /* Ajuste de padding */
+            text-decoration: none;
+            font-size: 12px; /* Ajuste de tamaño de fuente */
+            transition: background 0.3s;
+        }
+        nav#sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .main-content {
+            padding: 80px 20px 20px; /* Ajuste para mayor espacio debajo del encabezado */
+            text-align: center;
+            height: calc(100vh - 60px - 80px); /* Altura total menos el encabezado y el menú */
+            overflow-y: auto; /* Habilitar el desplazamiento si es necesario */
+        }
+        h1 {
+            margin: 20px 0;
+            font-size: 28px;
+            color: #007BFF;
+        }
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .service-card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(25% - 20px);
+            max-width: 250px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card i {
+            font-size: 40px;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+        .service-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .service-card p {
+            font-size: 14px;
+            color: #555;
+        }
+        footer {
+            width: 100%;
+            background-color: #222;
+            color: #ccc;
+            padding: auto;
+            font-size: 14px;
+            position: relative;
+            margin-top: auto; /* Asegura que el pie de página esté al final */
+        }
+        .footer-top {
+            padding-bottom: 20px;
+        }
+        .footer-columns {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1100px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .footer-column {
+            width: auto;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .footer-column h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 20px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 10;
+            padding: 10px;
+            top: 50px; /* Alineación debajo del encabezado */
+            left: 0;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .footer-bottom {
+    background-color: #2c3e50; /* Color de fondo oscuro */
+    color: white; /* Color del texto */
+    padding: 20px; /* Espaciado interior */
+    text-align: center; /* Alinear el texto al centro */
+    position: relative; /* Para el posicionamiento de elementos */
+    bottom: 0; /* Mantener en la parte inferior */
+    width: 100%; /* Ancho completo */
+}
+
+.footer-bottom p {
+    margin: 0; /* Sin margen */
+    font-size: 14px; /* Tamaño de fuente */
+}
+
+.footer-links {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin relleno */
+    margin: 10px 0 0; /* Margen superior */
+}
+
+.footer-links li {
+    display: inline; /* Mostrar en línea */
+    margin: 0 15px; /* Espaciado entre enlaces */
+}
+
+.footer-links a {
+    color: #ecf0f1; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s; /* Transición para el hover */
+}
+
+.footer-links a:hover {
+    color: #3498db; /* Color en hover */
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    padding: 10px;
+    top: 50px; /* Alineación debajo del encabezado */
+    left: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1>
+            <a href="index.html" style="text-decoration: none; color: inherit;">Travelers World</a>
+        </h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+            <li><a href="beneficios.html">Hazte Socio</a></li>
+            <li class="dropdown" id="user-dropdown">
+                <span id="greeting" class="greeting"><a href="inicio.html" style="color: white; text-decoration: none;">Iniciar Sesión</a></span>
+                <div class="dropdown-content" id="user-menu">
+                    <a href="perfil.html">Mi perfil</a>
+                    <a href="#" id="logout-btn">Cerrar sesión</a>
+                </div>
+            </li>
+            
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="sidebar">
+    <ul>
+        <li><a href="vuelos.html"><i class="fas fa-plane"></i><br>Vuelos</a></li>
+        <li><a href="hoteles.html"><i class="fas fa-bed"></i><br>Hoteles</a></li>
+        <li><a href="paquetes.html"><i class="fas fa-suitcase-rolling"></i><br>Paquetes</a></li>
+        <li><a href="actividades.html"><i class="fas fa-hiking"></i><br>Actividades</a></li>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <h1>Bienvenido a Travelers World</h1>
+    <h2>Nuestros Servicios</h2>
+    <div class="services">
+        <div class="service-card">
+            <i class="fas fa-plane"></i>
+            <h3><a href="vuelos.html" style="text-decoration: none; color: inherit;">Reservar Vuelos</a></h3>
+            <p>Encuentra los mejores precios en vuelos.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-bed"></i>
+            <h3><a href="hoteles.html" style="text-decoration: none; color: inherit;">Reservar Hoteles</a></h3>
+            <p>Hospédate en los mejores hoteles del mundo.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-suitcase-rolling"></i>
+            <h3><a href="paquetes.html" style="text-decoration: none; color: inherit;">Paquetes Turísticos</a></h3>
+            <p>Descubre nuestros paquetes todo incluido.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-hiking"></i>
+            <h3><a href="actividades.html" style="text-decoration: none; color: inherit;">Actividades</a></h3>
+            <p>Descubre las mejores actividades en tu destino.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Acerca de Nosotros</h3>
+                <ul>
+                    <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="mision.html">Misión </a></li>
+                    <li><a href="vision.html">Vision</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="vuelos.html">Vuelos</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                    <li><a href="paquetes.html">Paquetes Turísticos</a></li>
+                    <li><a href="actividades.html">Actividades</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul>
+                    <li><a href="ayuda.html">Centro de ayuda</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Siguenos</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="https://www.instagram.com/travelers_world24/">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travelers World. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="politicas.html">Política de privacidad</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    const userDropdown = document.getElementById("user-dropdown");
+    const userMenu = document.getElementById("user-menu");
+    const greeting = document.getElementById("greeting");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    // Cargar el nombre de usuario al cargar la página
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        greeting.innerHTML = `<span id="user-name" style="color: white; text-decoration: none;">Hola, ${userName}</span>`;
+    } else {
+        greeting.innerHTML = `<a href="inicio.html" style="color: white; text-decoration: none;">Iniciar Sesión</a>`;
+    }
+
+    // Mostrar el menú al hacer clic en el nombre de usuario
+    greeting.addEventListener("click", function () {
+        if (userName) {
+            userMenu.style.display = userMenu.style.display === "block" ? "none" : "block"; // Alternar visibilidad del menú
+        }
+    });
+
+    // Ocultar el menú al hacer clic en "Cerrar sesión"
+    logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem('userName'); // Elimina el nombre de usuario del localStorage
+        greeting.innerHTML = `<a href="inicio.html" style="color: white; text-decoration: none;">Iniciar Sesión</a>`;
+        userMenu.style.display = "none"; // Cierra el menú desplegable
+    });
+
+    // Cerrar el menú al hacer clic fuera (opcional)
+    window.addEventListener("click", function (event) {
+        if (!greeting.contains(event.target) && !userMenu.contains(event.target)) {
+            userMenu.style.display = "none"; // Cierra el menú desplegable
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>

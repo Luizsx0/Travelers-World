@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .summary {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .summary h3 {
+            margin: 10px 0;
+        }
+        .total {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .pay-button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .pay-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary">
+        <h1>Resumen de Factura</h1>
+        <div id="invoiceDetails"></div>
+        <div class="total" id="totalAmount"></div>
+        <a href="https://www.paypal.com" class="pay-button">Pagar con PayPal</a>
+    </div>
+    <script>
+        function displayInvoice() {
+            const checkinDate = new Date(sessionStorage.getItem('checkinDate'));
+            const checkoutDate = new Date(sessionStorage.getItem('checkoutDate'));
+            const numberOfPassengers = sessionStorage.getItem('passengers');
+            const selectedFlights = JSON.parse(sessionStorage.getItem('selectedFlights')) || [];
+            const selectedActivities = JSON.parse(sessionStorage.getItem('selectedActivities')) || [];
+
+            // Calcular el número de noches
+            const timeDifference = checkoutDate - checkinDate;
+            const numberOfNights = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+            // Calcular precios
+            let flightsSummary = selectedFlights.map(flight => `${flight.flight} - $${flight.price}`).join('<br>');
+            let activitiesSummary = selectedActivities.map(activity => `${activity.activity} - $${activity.price}`).join('<br>');
+            const totalFlights = selectedFlights.reduce((total, flight) => total + parseFloat(flight.price), 0);
+            const totalActivities = selectedActivities.reduce((total, activity) => total + parseFloat(activity.price), 0);
+            const hotelPricePerNight = 100; // Precio del hotel por noche (ajustar según necesidad)
+            const totalHotelCost = hotelPricePerNight * numberOfNights;
+            const totalAmount = totalFlights + totalActivities + totalHotelCost;
+
+            const invoiceDetails = `
+                <h3>Número de Pasajeros: ${numberOfPassengers}</h3>
+                <h3>Vuelos Seleccionados:</h3>
+                <p>${flightsSummary}</p>
+                <h3>Actividades Seleccionadas:</h3>
+                <p>${activitiesSummary}</p>
+                <h3>Costo del Hotel por ${numberOfNights} noche(s): $${totalHotelCost}</h3>
+            `;
+
+            document.getElementById('invoiceDetails').innerHTML = invoiceDetails;
+            document.getElementById('totalAmount').innerText = `Total a Pagar: $${totalAmount}`;
+        }
+
+        window.onload = displayInvoice;
+    </script>
+</body>
+</html>

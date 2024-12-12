@@ -1,0 +1,75 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.trip_bx {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bx {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    margin-bottom: 15px; /* Espacio entre bloques de búsqueda */
+}
+
+.card {
+    margin-right: 10px;
+    background: #f8f9fa; /* Fondo claro para las tarjetas */
+    border: 1px solid #ced4da; /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px;
+    min-width: 120px; /* Ancho mínimo */
+}
+
+.card h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #007BFF;
+}
+
+.card input[type="text"],
+.card input[type="date"],
+.card select {
+    width: 100%; /* Ancho completo */
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.explore-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.explore-button:hover {
+    background: #218838; /* Color en hover */
+}
+
+#flight-results {
+    margin-top: 20px;
+}
+
+.flight-result {
+    background: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}

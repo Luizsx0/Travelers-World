@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos</title>
+    <style>
+        /* Estilos existentes */
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 40px;
+            padding: 10px 20px;
+            background-color: rgb(31, 143, 255);
+        }
+
+        .logo h1 {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .logo h1 a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo h1 a:hover {
+            color: gold;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .dropdown-content {
+            display: none; /* Menú oculto por defecto */
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .menu {
+            width: 200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: fixed;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .favoritos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Cambiado para alinear horizontalmente */
+        }
+
+        .favorito {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            width: calc(30% - 20px); /* Para que los cuadrados sean más pequeños y se alineen horizontalmente */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .favorito h3 {
+            margin: 0;
+        }
+
+        .reservas-container {
+            margin-top: 20px;
+        }
+
+        .reserva {
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .reserva h3 {
+            color: #007bff;
+        }
+
+        .btnVerMas {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btnEliminar {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+
+        .btnVerMas:hover, .btnEliminar:hover {
+            opacity: 0.8;
+        }
+
+        /* Nuevos estilos para el menú */
+        .menu a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 style="font-size: 20px; margin: 0;">
+                <a href="index.html" style="text-decoration: none; color: inherit;">Travelers World</a>
+            </h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+                <li><a href="beneficios.html">Hazte Socio</a></li>
+                <li class="dropdown">
+                    <span id="greeting" class="greeting" style="cursor: pointer;"><a href="javascript:void(0);">Iniciar Sesión</a></span>
+                    <div class="dropdown-content" id="user-menu">
+                        <a href="favoritos.html">Favoritos</a>
+                        <a href="perfil.html">Mi perfil</a>
+                        <a href="#" id="logout-btn">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="menu">
+        <h2>Viajes</h2>
+        <a href="#" id="favoritosLink">Mis Viajes Favoritos</a>
+        <a href="#" id="hechosLink">Viajes Hechos</a>
+        <a href="#" id="reservasLink">Reservas Actuales</a>
+    </div>
+
+    <div class="container">
+        <h1>Perfil de Viajes</h1>
+        <div class="info" id="infoContainer">
+            Selecciona una opción en el menú para ver más información.
+        </div>
+    </div>
+    <div id="favoritosContainer" class="favoritos-container"></div>
+
+    <script>
+        // Funciones y lógica existente
+        const userName = localStorage.getItem('userName');
+        const greetingElement = document.getElementById('greeting');
+        const userMenu = document.getElementById('user-menu');
+
+        if (userName) {
+            greetingElement.innerHTML = userName; // Mostrar nombre de usuario
+            userMenu.style.display = 'none'; // Asegúrate de que esté oculto inicialmente
+        }
+
+        greetingElement.addEventListener('click', function() {
+            // Alternar la visibilidad del menú al hacer clic
+            userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('userName'); // Eliminar el nombre de usuario
+            greetingElement.innerHTML = '<a href="inicio.html">Iniciar Sesión</a>'; // Cambiar a enlace
+            userMenu.style.display = 'none'; // Ocultar el menú desplegable
+        });
+
+        document.getElementById('favoritosLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            mostrarFavoritos();
+        });
+
+        document.getElementById('hechosLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            mostrarHechos();
+        });
+
+        document.getElementById('reservasLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            mostrarReservas();
+        });
+        function mostrarReservas() {
+    const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+    const infoContainer = document.getElementById('infoContainer');
+
+    if (reservas.length === 0) {
+        infoContainer.innerHTML = 'No tienes reservas actuales.';
+    } else {
+        infoContainer.innerHTML = reservas.map(habitacion => `
+            <div class="reserva">
+                <h3>${habitacion.tipo}</h3>
+                <p>Capacidad: ${habitacion.personas} personas</p>
+                <p>Precio por noche: $${habitacion.precio}</p>
+                <p>${habitacion.descripcion}</p>
+                <button class="btnVerMas" onclick="verMas(${habitacion.id})">Ver Más</button>
+                <button class="btnEliminar" onclick="eliminarReserva(${habitacion.id})">Eliminar</button>
+            </div>
+        `).join('');
+    }
+}
+
+
+        function mostrarHechos() {
+            const hechos = JSON.parse(localStorage.getItem('hechos')) || [];
+            const infoContainer = document.getElementById('infoContainer');
+
+            if (hechos.length === 0) {
+                infoContainer.innerHTML = 'No tienes viajes hechos.';
+            } else {
+                infoContainer.innerHTML = hechos.map(viaje => `
+                    <div class="reserva">
+                        <h3>${viaje.destino}</h3>
+                        <p>Fecha: ${viaje.fecha}</p>
+                        <p>Descripción: ${viaje.descripcion}</p>
+                        <button class="btnVerMas" onclick="verMas(${viaje.id})">Ver Más</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function mostrarFavoritos() {
+            const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            const favoritosContainer = document.getElementById('favoritosContainer');
+
+            if (favoritos.length === 0) {
+                favoritosContainer.innerHTML = '<p>No tienes viajes favoritos.</p>';
+            } else {
+                favoritosContainer.innerHTML = favoritos.map(viaje => `
+                    <div class="favorito">
+                        <h3>${viaje.nombre}</h3>
+                        <p>Destino: ${viaje.destino}</p>
+                        <button class="btnVerMas" onclick="verMas(${viaje.id})">Ver Más</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function verMas(id) {
+            // Aquí puedes implementar la lógica para mostrar más información del viaje
+            alert('Mostrando más información para el ID: ' + id);
+        }
+
+        function eliminarReserva(id) {
+            // Aquí puedes implementar la lógica para eliminar la reserva
+            alert('Reserva eliminada con ID: ' + id);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelos y Actividades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .selection-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .checkbox-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .gallery img {
+            width: 100px;
+            height: 75px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vuelos y Actividades</h1>
+
+        <div class="selection-section">
+            <h2 class="section-title">Información del Hotel</h2>
+            <div id="hotelInfo"></div>
+        </div>
+
+        <div class="selection-section">
+            <h2 class="section-title">Opciones de Vuelos</h2>
+            <div id="flightOptions"></div>
+        </div>
+
+        <div class="selection-section">
+            <h2 class="section-title">Actividades Disponibles</h2>
+            <div id="activityOptions"></div>
+        </div>
+
+        <button onclick="proceedToInvoice()">Siguiente</button>
+    </div>
+
+    <script>
+        function loadHotelInfo() {
+            const destinationCity = sessionStorage.getItem('selectedHotelDestination');
+            const selectedHotelIndex = sessionStorage.getItem('selectedHotelIndex');
+
+            const hotels = {
+                Quito: [
+                    {
+                        name: 'Hotel Quito Plaza',
+                        description: 'Un hotel moderno en el centro de Quito.',
+                        rating: '★★★★☆',
+                        services: 'Wi-Fi, Desayuno gratuito, Gimnasio',
+                        images: ['hotel_image1.jpg', 'hotel_image2.jpg'],
+                    },
+                    {
+                        name: 'Hotel Andino',
+                        description: 'Alojamiento acogedor con vista a las montañas.',
+                        rating: '★★★☆☆',
+                        services: 'Wi-Fi, Restaurante, Spa',
+                        images: ['hotel_image3.jpg', 'hotel_image4.jpg'],
+                    },
+                ],
+                Guayaquil: [
+                    {
+                        name: 'Hotel Guayaquil Inn',
+                        description: 'Hotel de lujo con piscina y gimnasio.',
+                        rating: '★★★★☆',
+                        services: 'Wi-Fi, Piscina, Gimnasio',
+                        images: ['hotel_image5.jpg', 'hotel_image6.jpg'],
+                    },
+                    {
+                        name: 'Hotel Continental',
+                        description: 'Ubicación ideal en el centro de Guayaquil.',
+                        rating: '★★★☆☆',
+                        services: 'Wi-Fi, Restaurante, Bar',
+                        images: ['hotel_image7.jpg', 'hotel_image8.jpg'],
+                    },
+                ],
+                Cuenca: [
+                    {
+                        name: 'Hotel Cuenca Palace',
+                        description: 'Un hotel elegante en el corazón de Cuenca.',
+                        rating: '★★★★☆',
+                        services: 'Wi-Fi, Desayuno, Spa',
+                        images: ['hotel_image9.jpg', 'hotel_image10.jpg'],
+                    },
+                    {
+                        name: 'Hotel Casa de la Abuela',
+                        description: 'Hotel familiar con encanto colonial.',
+                        rating: '★★★☆☆',
+                        services: 'Wi-Fi, Restaurante',
+                        images: ['hotel_image11.jpg', 'hotel_image12.jpg'],
+                    },
+                ],
+            };
+
+            const hotel = hotels[destinationCity][selectedHotelIndex];
+            document.getElementById('hotelInfo').innerHTML = `
+                <h3>${hotel.name}</h3>
+                <p>${hotel.description}</p>
+                <p>Valoración: ${hotel.rating}</p>
+                <p>Servicios: ${hotel.services}</p>
+                <div class="gallery">
+                    ${hotel.images.map(image => `<img src="${image}" alt="${hotel.name}">`).join('')}
+                </div>
+            `;
+        }
+
+        function loadFlightOptions() {
+            const flights = [
+                { airline: 'Tame', price: 150 },
+                { airline: 'Avianca', price: 200 },
+                { airline: 'Latam', price: 250 },
+            ];
+
+            const flightOptionsDiv = document.getElementById('flightOptions');
+
+            flights.forEach((flight, index) => {
+                const flightItem = document.createElement('div');
+                flightItem.className = 'checkbox-item';
+                flightItem.innerHTML = `
+                    <label>
+                        <input type="checkbox" id="flight${index}" value="${flight.price}">
+                        ${flight.airline} - $${flight.price}
+                    </label>
+                `;
+                flightOptionsDiv.appendChild(flightItem);
+            });
+        }
+
+        function loadActivityOptions() {
+            const destinationCity = sessionStorage.getItem('selectedHotelDestination');
+            const activities = {
+                Quito: [
+                    { name: 'Visita al Teleférico', price: 30 },
+                    { name: 'Tour en bicicleta por la ciudad', price: 20 },
+                ],
+                Guayaquil: [
+                    { name: 'Excursión al Parque Histórico', price: 25 },
+                    { name: 'Tour de comida local', price: 40 },
+                ],
+                Cuenca: [
+                    { name: 'Visita a las Ruinas de Ingapirca', price: 35 },
+                    { name: 'Tour de arte y cultura', price: 20 },
+                ],
+            };
+
+            const selectedActivities = activities[destinationCity] || [];
+            const activityOptionsDiv = document.getElementById('activityOptions');
+
+            selectedActivities.forEach((activity, index) => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'checkbox-item';
+                activityItem.innerHTML = `
+                    <label>
+                        <input type="checkbox" id="activity${index}" value="${activity.price}">
+                        ${activity.name} - $${activity.price}
+                    </label>
+                `;
+                activityOptionsDiv.appendChild(activityItem);
+            });
+        }
+
+        function proceedToInvoice() {
+            const selectedFlights = [];
+            const flightOptionsDiv = document.getElementById('flightOptions');
+            const flightCheckboxes = flightOptionsDiv.querySelectorAll('input[type="checkbox"]');
+
+            flightCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedFlights.push({
+                        airline: checkbox.id,
+                        price: checkbox.value
+                    });
+                }
+            });
+
+            const selectedActivities = [];
+            const activityOptionsDiv = document.getElementById('activityOptions');
+            const activityCheckboxes = activityOptionsDiv.querySelectorAll('input[type="checkbox"]');
+
+            activityCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedActivities.push({
+                        activity: checkbox.id,
+                        price: checkbox.value
+                    });
+                }
+            });
+
+            sessionStorage.setItem('selectedFlights', JSON.stringify(selectedFlights));
+            sessionStorage.setItem('selectedActivities', JSON.stringify(selectedActivities));
+
+            window.location.href = 'invoice.html';
+        }
+
+        window.onload = function() {
+            loadHotelInfo();
+            loadFlightOptions();
+            loadActivityOptions();
+        };
+    </script>
+</body>
+</html>

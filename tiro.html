@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Vuelos</title>
+    <link rel="stylesheet" href="tiro.css">
+</head>
+<body>
+    <div class="trip_bx">
+        <div class="search_bx">
+            <div class="card">
+                <h4>Tipo de Vuelo</h4>
+                <select id="flight-type">
+                    <option value="one-way">Solo Ida</option>
+                    <option value="round-trip">Ida y Vuelta</option>
+                </select>
+            </div>
+            <div class="card">
+                <h4>Lugar de Origen</h4>
+                <input type="text" id="origin" placeholder="Ingresa tu ciudad de origen">
+            </div>
+            <div class="card">
+                <h4>Destino</h4>
+                <input type="text" id="destination" placeholder="Ingresa tu destino">
+            </div>
+            <div class="card">
+                <h4>Fecha de Salida</h4>
+                <input type="date" id="departure-date">
+            </div>
+            <div class="card">
+                <input type="button" value="Buscar" class="explore-button" onclick="searchFlights()">
+            </div>
+        </div>
+        <div id="flight-results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

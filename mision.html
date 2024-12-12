@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión - Travelers World</title>
+    <link rel="stylesheet" href="vuelo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1 style="font-size: 20px; margin: 0;">
+            <a href="index.html" style="text-decoration: none; color: inherit;">Travelers World</a>
+        </h1>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="favoritos.html">Favoritos (<span id="favorites-count">0</span>)</a></li>
+            <li><a href="beneficios.html">Hazte Socio</a></li>
+            <li class="dropdown" id="user-dropdown">
+                <span id="greeting" class="greeting"><a href="inicio.html" style="color: white; text-decoration: none;">Iniciar Sesión</a></span>
+                <div class="dropdown-content" id="user-menu">
+                    <a href="perfil.html">Mi perfil</a>
+                    <a href="#" id="logout-btn">Cerrar sesión</a>
+                </div>
+            </li>
+        </ul>
+        <i class="bi bi-three-dots"></i>
+    </nav>
+</header>
+
+<nav id="sidebar">
+    <ul>
+        <li><a href="vuelos.html"><i class="fas fa-plane"></i><br>Vuelos</a></li>
+        <li><a href="hoteles.html"><i class="fas fa-bed"></i><br>Hoteles</a></li>
+        <li><a href="paquetes.html"><i class="fas fa-suitcase-rolling"></i><br>Paquetes</a></li>
+        <li><a href="actividades.html"><i class="fas fa-hiking"></i><br>Actividades</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <h1>Nuestra Misión</h1>
+    <p>En <strong>Travelers World</strong>, nuestra misión es hacer que cada viaje sea una aventura accesible y emocionante. Nos esforzamos por conectar a los turistas con los destinos de sus sueños de manera fácil y rápida. Creemos firmemente en ofrecer experiencias únicas que estén al alcance de todos, sin importar el destino o el presupuesto.</p>
+    
+    <p>Nuestra prioridad es brindarte atención personalizada, garantizando que cada aspecto de tu viaje esté cuidadosamente planificado y que recibas el mejor servicio posible. A través de nuestras asociaciones con proveedores confiables, trabajamos para ofrecer tarifas competitivas y servicios de alta calidad, asegurando que cada viaje supere tus expectativas.</p>
+    
+    <p>Nos enorgullece contribuir a la realización de sueños, ya sea para aquellos que buscan explorar nuevas culturas, relajarse en hermosos paisajes, o simplemente descubrir la magia del viaje. En <strong>Travelers World</strong>, creemos que viajar es una forma de vida, y estamos aquí para ayudarte a descubrir el mundo, una aventura a la vez.</p>
+</div>
+
+<footer>
+    <div class="subscribe">
+        <h2>Suscríbete & <br>Obtén un Descuento Especial</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempore necessitatibus accusamus sint dolor.</p>
+        <div class="input">
+            <input type="text" placeholder="Ingresa tu Email">
+            <button>Suscríbete</button>
+        </div>
+    </div>
+
+    <div class="footer-top">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Acerca de Nosotros</h3>
+                <ul>
+                    <li><a href="nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="mision.html">Misión</a></li>
+                    <li><a href="vision.html">Visión</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul>
+                    <li><a href="ayuda.html">Centro de ayuda</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="vuelos.html">Vuelos</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                    <li><a href="paquetes.html">Paquetes turísticos</a></li>
+                    <li><a href="actividades.html">Actividades</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Síguenos</h3>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://www.instagram.com/travelers_world24/"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travelers World. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="politicas.html">Política de privacidad</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

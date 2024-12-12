@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Hoteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .search-inputs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .hotel-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 250px; /* Tamaño más pequeño */
+            transition: transform 0.2s;
+        }
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+        .hotel-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .hotel-info {
+            color: #333;
+        }
+        .services {
+            margin: 10px 0;
+        }
+        .service-item {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 2px;
+            display: inline-block;
+        }
+        .no-results {
+            text-align: center;
+            color: #ff0000;
+            margin-top: 20px;
+        }
+        .favorites-btn,
+        .details-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .favorites-btn {
+            background-color: #ff4081; /* Color para favoritos */
+        }
+        .favorites-btn:hover {
+            background-color: #e91e63; /* Hover para favoritos */
+        }
+        .details-btn {
+            background-color: #007BFF; /* Color para detalles */
+        }
+        .details-btn:hover {
+            background-color: #0056b3; /* Hover para detalles */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Buscar Hoteles</h1>
+    <div class="search-inputs">
+        <input type="text" id="destinationInput" placeholder="Ingrese su destino">
+        <input type="date" id="checkinDate" placeholder="Fecha de entrada">
+        <input type="date" id="checkoutDate" placeholder="Fecha de salida">
+        <input type="number" id="passengers" min="1" placeholder="Pasajeros" value="1">
+        <button id="searchButton">Buscar</button>
+    </div>
+
+    <div id="resultsSection" class="results"></div>
+</div>
+
+<script>
+    const hotels = [
+        {
+            name: 'Hotel Hilton Colón',
+            location: 'Guayaquil, Ecuador',
+            priceValue: 150,
+            image: 'hilton.jfif',
+            description: 'Hotel de lujo con instalaciones modernas y servicios excepcionales.',
+            services: ['🏊 Piscina', '💆 Spa', '🏋️ Gimnasio', '🍽️ Restaurante'],
+            city: 'guayaquil'
+        },
+        {
+            name: 'Hotel Oro Verde',
+            location: 'Guayaquil, Ecuador',
+            priceValue: 120,
+            image: 'oro.jfif',
+            description: 'Un hotel elegante con un servicio excepcional y vistas al río.',
+            services: ['🍽️ Restaurante', '📶 WiFi gratuito', '🚖 Transporte al aeropuerto'],
+            city: 'guayaquil'
+        },
+        {
+            name: 'Hotel Dann Carlton',
+            location: 'Quito, Ecuador',
+            priceValue: 130,
+            image: 'dann.jfif',
+            description: 'Hotel moderno y elegante, ideal para viajes de negocios y placer.',
+            services: ['🍽️ Restaurante', '🏋️ Gimnasio', '💆 Spa', '📶 WiFi gratuito'],
+            city: 'quito'
+        },
+        {
+            name: 'Hotel Mansion del Angel',
+            location: 'Quito, Ecuador',
+            priceValue: 100,
+            image: 'angel.jfif',
+            description: 'Un hotel boutique en el corazón de Quito.',
+            services: ['🍽️ Restaurante', '🛁 Jacuzzi', '📶 WiFi gratuito'],
+            city: 'quito'
+        },
+        {
+            name: 'Hotel Cuenca',
+            location: 'Cuenca, Ecuador',
+            priceValue: 90,
+            image: 'cuenca3.jfif',
+            description: 'Ubicado en el centro histórico, ideal para explorar la ciudad.',
+            services: ['📶 WiFi gratuito', '🛌 Servicio de habitaciones', '🍽️ Restaurante'],
+            city: 'cuenca'
+        },
+        {
+            name: 'Hotel Oro Verde',
+            location: 'Manta, Ecuador',
+            priceValue: 110,
+            image: 'manta2.jfif',
+            description: 'Hotel en la playa, perfecto para vacaciones familiares.',
+            services: ['🏖️ Playa', '🍽️ Restaurante', '🏊 Piscina'],
+            city: 'manta'
+        },
+    ];
+
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const destination = document.getElementById('destinationInput').value.toLowerCase();
+        const checkinDate = document.getElementById('checkinDate').value;
+        const checkoutDate = document.getElementById('checkoutDate').value;
+        const passengers = parseInt(document.getElementById('passengers').value, 10);
+
+        const filteredHotels = hotels.filter(hotel => hotel.city.includes(destination));
+
+        const resultsSection = document.getElementById('resultsSection');
+        resultsSection.innerHTML = ''; // Limpiar resultados previos
+
+        if (filteredHotels.length === 0) {
+            resultsSection.innerHTML = '<p class="no-results">No se encontraron hoteles para este destino.</p>';
+            return;
+        }
+
+        filteredHotels.forEach(hotel => {
+            const hotelCard = document.createElement('div');
+            hotelCard.classList.add('hotel-card');
+
+            const checkin = new Date(checkinDate);
+            const checkout = new Date(checkoutDate);
+            const days = (checkout - checkin) / (1000 * 60 * 60 * 24);
+            const subtotal = hotel.priceValue * days * passengers;
+            const tax = subtotal * 0.12;
+            const totalCost = subtotal + tax;
+
+            hotelCard.innerHTML = `
+                <img src="${hotel.image}" alt="${hotel.name}">
+                <div class="hotel-info">
+                    <h3>${hotel.name}</h3>
+                    <p><strong>Ubicación:</strong> ${hotel.location}</p>
+                    <p>${hotel.description}</p>
+                    <div class="services">
+                        ${hotel.services.map(service => `<span class="service-item">${service}</span>`).join('')}
+                    </div>
+                    <p><strong>Días:</strong> ${days}</p>
+                    <p><strong>Pasajeros:</strong> ${passengers}</p>
+                    <p><strong>Total: $${totalCost.toFixed(2)}</strong></p>
+                    <a href="favoritos.html" class="favorites-btn">Agregar a Favoritos</a>
+                    <a href="detalles.html?hotel=${encodeURIComponent(hotel.name)}&price=${hotel.priceValue}&days=${days}&passengers=${passengers}" class="details-btn">Ver Más</a>
+                </div>
+            `;
+            resultsSection.appendChild(hotelCard);
+        });
+    });
+</script>
+</body>
+</html>
